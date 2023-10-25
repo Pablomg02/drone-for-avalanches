@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def plot (a, b, c, point):
@@ -16,19 +17,37 @@ def is_in (a,b,c,point):
     d1 = sign(point, a, b)
     d2 = sign(point, b, c)
     d3 = sign(point, c, a)
-    
+
     has_neg = (d1 < 0) or (d2 < 0) or (d3 < 0)
     has_pos = (d1 > 0) or (d2 > 0) or (d3 > 0)
 
     return not (has_neg and has_pos)
 
-a = [15, 0]
-b = [50, 40]
-c = [50, -40]
 
-point = [40, 20]
+def rotate_triangle(a,b,c,center = [1,0], angle = 90): # a,b,c and center must be a list of 2 elements [x,y]
+    triangle = np.array([[a[0],b[0],c[0]], [a[1],b[1],c[1]]])
+    triangle_centered = triangle - np.array([[center[0]], [center[1]]])
+    print(triangle)
+
+    angle = np.deg2rad(angle)
+
+    rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
+
+    triangle = rotation_matrix.dot(triangle_centered) #revisar esto porque esta mal
+
+    print(triangle)
+
+
+
+a = [0, 0]
+b = [1, 0]
+c = [0, 1]
+
+point = [1, 0]
 
 plot(a, b, c, point)
+
+rotate_triangle(a,b,c,point)
 
 print(is_in(a, b, c, point))
 
