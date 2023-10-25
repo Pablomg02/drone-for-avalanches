@@ -2,10 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def plot (a, b, c, point):
+def plot (a, b, c, point, drone):
     plt.plot([a[0], b[0], c[0], a[0]], [a[1], b[1], c[1], a[1]])
     plt.plot(point[0], point[1], 'ro') # ro = red circle
+    plt.plot(drone[0], drone[1], 'bo') # bo = blue circle
     plt.show()
+
+
 
 
 def is_in (a,b,c,point):
@@ -24,18 +27,24 @@ def is_in (a,b,c,point):
     return not (has_neg and has_pos)
 
 
-def rotate_triangle(a,b,c,center = [1,0], angle = 90): # a,b,c and center must be a list of 2 elements [x,y]
+
+
+def rotate_triangle(a,b,c,center = [0,0], angle = 30): # a,b,c and center must be a list of 2 elements [x,y]
     triangle = np.array([[a[0],b[0],c[0]], [a[1],b[1],c[1]]])
-    triangle_centered = triangle - np.array([[center[0]], [center[1]]])
+    triangle_centered = triangle - np.array([[center[0], center[0], center[0]], [center[1], center[1], center[1]]])
     print(triangle)
 
     angle = np.deg2rad(angle)
 
     rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
 
-    triangle = rotation_matrix.dot(triangle_centered) #revisar esto porque esta mal
+    triangle_centered = rotation_matrix.dot(triangle_centered) #revisar esto porque esta mal
+    triangle = triangle_centered + np.array([[center[0], center[0], center[0]], [center[1], center[1], center[1]]])
 
-    print(triangle)
+    return([triangle[0][0], triangle[1][0]], [triangle[0][1], triangle[1][1]], [triangle[0][2], triangle[1][2]])
+
+
+
 
 
 
@@ -43,14 +52,22 @@ a = [0, 0]
 b = [1, 0]
 c = [0, 1]
 
-point = [1, 0]
+point = [3,3]
+drone = [0, 0]
+angle = 30
 
-plot(a, b, c, point)
+plot(a, b, c, point, drone)
 
-rotate_triangle(a,b,c,point)
+a_, b_, c_ = rotate_triangle(a,b,c,drone, angle)
+
+plot(a_, b_, c_, point, drone)
 
 print(is_in(a, b, c, point))
 
+
+
+"""
 if is_in(a, b, c, point):
     print("The point is inside the triangle")
     print("Distance: ", point[0] - a[0])
+"""
