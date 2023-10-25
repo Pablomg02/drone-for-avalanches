@@ -29,7 +29,7 @@ def is_in (a,b,c,point):
 
 
 
-def rotate_triangle(a,b,c,center = [0,0], angle = 30): # a,b,c and center must be a list of 2 elements [x,y]
+def rotate_triangle(a,b,c,center = [0,0], angle=0): # a,b,c and center must be a list of 2 elements [x,y]
     triangle = np.array([[a[0],b[0],c[0]], [a[1],b[1],c[1]]])
     triangle_centered = triangle - np.array([[center[0], center[0], center[0]], [center[1], center[1], center[1]]])
     print(triangle)
@@ -44,17 +44,23 @@ def rotate_triangle(a,b,c,center = [0,0], angle = 30): # a,b,c and center must b
     return([triangle[0][0], triangle[1][0]], [triangle[0][1], triangle[1][1]], [triangle[0][2], triangle[1][2]])
 
 
+"""def rotate_velocity(velocity, angle = 30):
+    angle = np.deg2rad(angle)
+    rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)], [np.sin(angle), np.cos(angle)]])
+    return rotation_matrix.dot(velocity)"""
 
 
 
 
-a = [0, 0]
-b = [1, 0]
-c = [0, 1]
 
-point = [3,3]
+
+point = [1,1]
 drone = [0, 0]
 angle = 30
+
+a = [drone[0], drone[1]]
+b = [drone[0]+1, drone[1]+0.5]
+c = [drone[0]+1, drone[1]-0.5]
 
 plot(a, b, c, point, drone)
 
