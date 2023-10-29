@@ -54,19 +54,27 @@ def rotate_triangle(a,b,c,center = [0,0], angle=0): # a,b,c and center must be a
 
 
 
-point = [1,1]
+point = [10,10]
 drone = [0, 0]
-angle = 30
+angle = 90
 
 a = [drone[0], drone[1]]
 b = [drone[0]+1, drone[1]+0.5]
 c = [drone[0]+1, drone[1]-0.5]
 
-plot(a, b, c, point, drone)
+#plot(a, b, c, point, drone)
 
 a_, b_, c_ = rotate_triangle(a,b,c,drone, angle)
 
-plot(a_, b_, c_, point, drone)
+#plot(a_, b_, c_, point, drone)
+
+plt.plot([a[0], b[0], c[0], a[0]], [a[1], b[1], c[1], a[1]])
+plt.plot([a_[0], b_[0], c_[0], a_[0]], [a_[1], b_[1], c_[1], a_[1]])
+
+plt.plot(point[0], point[1], 'ro') # ro = red circle
+plt.plot(drone[0], drone[1], 'bo') # bo = blue circle
+plt.show()
+
 
 print(is_in(a, b, c, point))
 
