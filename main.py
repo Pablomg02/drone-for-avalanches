@@ -6,6 +6,7 @@ def plot (a, b, c, point, drone):
     plt.plot([a[0], b[0], c[0], a[0]], [a[1], b[1], c[1], a[1]])
     plt.plot(point[0], point[1], 'ro') # ro = red circle
     plt.plot(drone[0], drone[1], 'bo') # bo = blue circle
+    plt.axis("equal")
     plt.show()
 
 
@@ -54,8 +55,8 @@ def rotate_triangle(a,b,c,center = [0,0], angle=0): # a,b,c and center must be a
 
 
 
-point = [10,10]
-drone = [0, 0]
+point = [0,0]
+drone = [3, 2]
 angle = 90
 
 a = [drone[0], drone[1]]
